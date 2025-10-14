@@ -3,47 +3,47 @@ import { NextResponse } from 'next/server'
 
 // Example API route for fetching projects
 export async function GET() {
-  const supabase = await createClient()
-  
-  const { data: { user }, error: userError } = await supabase.auth.getUser()
+    const supabase = await createClient()
 
-  if (userError || !user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
 
-  // Example: Fetch projects from database
-  // const { data: projects, error } = await supabase
-  //   .from('projects')
-  //   .select('*')
+    if (userError || !user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
 
-  // For now, return mock data
-  return NextResponse.json({ 
-    projects: [],
-    message: 'Connect your database and uncomment the query above' 
-  })
+    // Example: Fetch projects from database
+    // const { data: projects, error } = await supabase
+    //   .from('projects')
+    //   .select('*')
+
+    // For now, return mock data
+    return NextResponse.json({
+        projects: [],
+        message: 'Connect your database and uncomment the query above'
+    })
 }
 
 // Example API route for creating a project
 export async function POST(request: Request) {
-  const supabase = await createClient()
-  
-  const { data: { user }, error: userError } = await supabase.auth.getUser()
+    const supabase = await createClient()
 
-  if (userError || !user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
 
-  const body = await request.json()
+    if (userError || !user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
 
-  // Example: Insert project into database
-  // const { data, error } = await supabase
-  //   .from('projects')
-  //   .insert([{ ...body, user_id: user.id }])
-  //   .select()
+    const body = await request.json()
 
-  return NextResponse.json({ 
-    success: true,
-    message: 'Connect your database and uncomment the query above',
-    receivedData: body
-  })
+    // Example: Insert project into database
+    // const { data, error } = await supabase
+    //   .from('projects')
+    //   .insert([{ ...body, user_id: user.id }])
+    //   .select()
+
+    return NextResponse.json({
+        success: true,
+        message: 'Connect your database and uncomment the query above',
+        receivedData: body
+    })
 }

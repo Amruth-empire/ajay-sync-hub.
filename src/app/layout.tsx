@@ -7,7 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AJAY Sync Hub - PM-AJAY Project Management",
-  description: "Project management platform for PM-AJAY initiative - Adarsh Gram, GIA, and Hostel projects",
+  description:
+    "Project management platform for PM-AJAY initiative - Adarsh Gram, GIA, and Hostel projects",
 };
 
 export default function RootLayout({

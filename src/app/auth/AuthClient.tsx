@@ -4,7 +4,13 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
@@ -12,8 +18,15 @@ import { z } from "zod";
 import { createClient } from "@/lib/supabase/client";
 
 const authSchema = z.object({
-  email: z.string().trim().email({ message: "Invalid email address" }).max(255, { message: "Email must be less than 255 characters" }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters" }).max(100, { message: "Password must be less than 100 characters" }),
+  email: z
+    .string()
+    .trim()
+    .email({ message: "Invalid email address" })
+    .max(255, { message: "Email must be less than 255 characters" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters" })
+    .max(100, { message: "Password must be less than 100 characters" }),
 });
 
 export default function AuthClient() {
@@ -26,7 +39,9 @@ export default function AuthClient() {
 
   useEffect(() => {
     const checkUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       if (user) {
         router.push("/dashboard");
       }
@@ -36,16 +51,16 @@ export default function AuthClient() {
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const validatedData = authSchema.parse({ email, password });
       setIsLoading(true);
-      
+
       const { error } = await supabase.auth.signInWithPassword({
         email: validatedData.email,
         password: validatedData.password,
       });
-      
+
       if (error) {
         if (error.message.includes("Invalid login credentials")) {
           toast({
@@ -82,13 +97,13 @@ export default function AuthClient() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const validatedData = authSchema.parse({ email, password });
       setIsLoading(true);
-      
+
       const redirectUrl = `${window.location.origin}/dashboard`;
-      
+
       const { error } = await supabase.auth.signUp({
         email: validatedData.email,
         password: validatedData.password,
@@ -96,12 +111,13 @@ export default function AuthClient() {
           emailRedirectTo: redirectUrl,
         },
       });
-      
+
       if (error) {
         if (error.message.includes("User already registered")) {
           toast({
             title: "Account already exists",
-            description: "An account with this email already exists. Please sign in instead.",
+            description:
+              "An account with this email already exists. Please sign in instead.",
             variant: "destructive",
           });
         } else {
@@ -138,14 +154,20 @@ export default function AuthClient() {
           <div className="w-16 h-16 gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
             <span className="text-white font-bold text-2xl">PM</span>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">PM-AJAY Platform</h1>
-          <p className="text-muted-foreground">Smart Collaboration & Communication</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
+            PM-AJAY Platform
+          </h1>
+          <p className="text-muted-foreground">
+            Smart Collaboration & Communication
+          </p>
         </div>
 
         <Card className="border-border">
           <CardHeader>
             <CardTitle>Welcome</CardTitle>
-            <CardDescription>Sign in to your account or create a new one</CardDescription>
+            <CardDescription>
+              Sign in to your account or create a new one
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
@@ -153,7 +175,7 @@ export default function AuthClient() {
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
               </TabsList>
-              
+
               <TabsContent value="signin">
                 <form onSubmit={handleSignIn} className="space-y-4">
                   <div className="space-y-2">
@@ -178,8 +200,8 @@ export default function AuthClient() {
                       required
                     />
                   </div>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full gradient-primary text-white border-0"
                     disabled={isLoading}
                   >
@@ -187,7 +209,7 @@ export default function AuthClient() {
                   </Button>
                 </form>
               </TabsContent>
-              
+
               <TabsContent value="signup">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div className="space-y-2">
@@ -215,8 +237,8 @@ export default function AuthClient() {
                       Password must be at least 6 characters long
                     </p>
                   </div>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full gradient-primary text-white border-0"
                     disabled={isLoading}
                   >

@@ -7,10 +7,34 @@ import { FolderKanban, Building2, IndianRupee, TrendingUp } from "lucide-react";
 
 export default function DashboardClient() {
   const stats = [
-    { title: "Active Projects", value: 156, icon: FolderKanban, trend: "+12%", trendUp: true },
-    { title: "Partner Agencies", value: 45, icon: Building2, trend: "+3%", trendUp: true },
-    { title: "Funds Allocated", value: "₹2.4Cr", icon: IndianRupee, trend: "+8%", trendUp: true },
-    { title: "Success Rate", value: "94%", icon: TrendingUp, trend: "+2%", trendUp: true },
+    {
+      title: "Active Projects",
+      value: 156,
+      icon: FolderKanban,
+      trend: "+12%",
+      trendUp: true,
+    },
+    {
+      title: "Partner Agencies",
+      value: 45,
+      icon: Building2,
+      trend: "+3%",
+      trendUp: true,
+    },
+    {
+      title: "Funds Allocated",
+      value: "₹2.4Cr",
+      icon: IndianRupee,
+      trend: "+8%",
+      trendUp: true,
+    },
+    {
+      title: "Success Rate",
+      value: "94%",
+      icon: TrendingUp,
+      trend: "+2%",
+      trendUp: true,
+    },
   ];
 
   const projects = [
@@ -21,7 +45,7 @@ export default function DashboardClient() {
       progress: 75,
       status: "On Track" as const,
       team: 12,
-      deadline: "Dec 2025"
+      deadline: "Dec 2025",
     },
     {
       name: "GIA Infrastructure Upgrade",
@@ -30,7 +54,7 @@ export default function DashboardClient() {
       progress: 45,
       status: "At Risk" as const,
       team: 8,
-      deadline: "Jan 2026"
+      deadline: "Jan 2026",
     },
     {
       name: "Hostel Construction Project",
@@ -39,7 +63,7 @@ export default function DashboardClient() {
       progress: 30,
       status: "Delayed" as const,
       team: 15,
-      deadline: "Nov 2025"
+      deadline: "Nov 2025",
     },
     {
       name: "Adarsh Gram Sanitation Drive",
@@ -48,14 +72,14 @@ export default function DashboardClient() {
       progress: 90,
       status: "On Track" as const,
       team: 10,
-      deadline: "Oct 2025"
-    }
+      deadline: "Oct 2025",
+    },
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-foreground mb-2">Dashboard</h1>
@@ -74,12 +98,14 @@ export default function DashboardClient() {
         {/* Projects Section */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-foreground">Active Projects</h2>
+            <h2 className="text-2xl font-bold text-foreground">
+              Active Projects
+            </h2>
             <button className="text-primary hover:text-primary/80 font-medium transition-colors">
               View All →
             </button>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {projects.map((project) => (
               <ProjectCard key={project.name} {...project} />

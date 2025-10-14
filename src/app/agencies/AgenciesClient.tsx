@@ -5,7 +5,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Building2, MapPin, Users, Phone, Mail, Search, Plus } from "lucide-react";
+import {
+  Building2,
+  MapPin,
+  Users,
+  Phone,
+  Mail,
+  Search,
+  Plus,
+} from "lucide-react";
 
 export default function AgenciesClient() {
   const agencies = [
@@ -16,7 +24,7 @@ export default function AgenciesClient() {
       projects: 8,
       status: "Active",
       contact: "+91 522 1234567",
-      email: "welfare.up@gov.in"
+      email: "welfare.up@gov.in",
     },
     {
       name: "Central Social Justice Ministry",
@@ -25,7 +33,7 @@ export default function AgenciesClient() {
       projects: 24,
       status: "Active",
       contact: "+91 11 2341234",
-      email: "socialjustice@nic.in"
+      email: "socialjustice@nic.in",
     },
     {
       name: "Bihar Tribal Development Corp",
@@ -34,7 +42,7 @@ export default function AgenciesClient() {
       projects: 5,
       status: "Active",
       contact: "+91 612 9876543",
-      email: "tribal.bihar@gov.in"
+      email: "tribal.bihar@gov.in",
     },
     {
       name: "MP Education Infrastructure Ltd",
@@ -43,7 +51,7 @@ export default function AgenciesClient() {
       projects: 6,
       status: "Under Review",
       contact: "+91 755 4567890",
-      email: "edu.infra@mp.gov.in"
+      email: "edu.infra@mp.gov.in",
     },
     {
       name: "Rajasthan Development Authority",
@@ -52,7 +60,7 @@ export default function AgenciesClient() {
       projects: 7,
       status: "Active",
       contact: "+91 141 3456789",
-      email: "dev.raj@gov.in"
+      email: "dev.raj@gov.in",
     },
     {
       name: "Maharashtra Housing Board",
@@ -61,24 +69,28 @@ export default function AgenciesClient() {
       projects: 4,
       status: "Active",
       contact: "+91 22 87654321",
-      email: "housing.mh@gov.in"
-    }
+      email: "housing.mh@gov.in",
+    },
   ];
 
   const statusColors: Record<string, string> = {
-    "Active": "bg-secondary text-white",
-    "Under Review": "bg-accent text-foreground"
+    Active: "bg-secondary text-white",
+    "Under Review": "bg-accent text-foreground",
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       <main className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">Agencies</h1>
-            <p className="text-muted-foreground">Manage executing and coordinating agencies</p>
+            <h1 className="text-4xl font-bold text-foreground mb-2">
+              Agencies
+            </h1>
+            <p className="text-muted-foreground">
+              Manage executing and coordinating agencies
+            </p>
           </div>
           <Button className="gradient-primary text-white border-0">
             <Plus className="h-4 w-4 mr-2" />
@@ -88,15 +100,15 @@ export default function AgenciesClient() {
 
         <div className="relative mb-8">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input 
-            placeholder="Search agencies..." 
-            className="pl-10"
-          />
+          <Input placeholder="Search agencies..." className="pl-10" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {agencies.map((agency, index) => (
-            <Card key={index} className="hover:shadow-lg transition-all border-border">
+            <Card
+              key={index}
+              className="hover:shadow-lg transition-all border-border"
+            >
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3">
@@ -104,11 +116,17 @@ export default function AgenciesClient() {
                       <Building2 className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <CardTitle className="text-lg mb-2">{agency.name}</CardTitle>
-                      <p className="text-sm text-muted-foreground">{agency.type}</p>
+                      <CardTitle className="text-lg mb-2">
+                        {agency.name}
+                      </CardTitle>
+                      <p className="text-sm text-muted-foreground">
+                        {agency.type}
+                      </p>
                     </div>
                   </div>
-                  <Badge className={statusColors[agency.status]}>{agency.status}</Badge>
+                  <Badge className={statusColors[agency.status]}>
+                    {agency.status}
+                  </Badge>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
