@@ -1,15 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
 import { useEffect } from "react";
 import { Home, Search, ArrowLeft, FileQuestion } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
+  // Next.js handles 404 logging automatically. You can add custom logging here if needed.
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -33,20 +29,24 @@ const NotFound = () => {
             Page Not Found
           </h2>
           <p className="text-muted-foreground text-lg mb-8 max-w-md mx-auto">
-            The page you're looking for doesn't exist or has been moved. 
-            Please check the URL or return to the homepage.
+            The page you're looking for doesn't exist or has been moved. Please
+            check the URL or return to the homepage.
           </p>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Button asChild size="lg" className="gradient-primary text-white border-0">
-              <Link to="/">
+            <Button
+              asChild
+              size="lg"
+              className="gradient-primary text-white border-0"
+            >
+              <Link href="/">
                 <Home className="h-5 w-5 mr-2" />
                 Go to Homepage
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to="/dashboard">
+              <Link href="/dashboard">
                 <ArrowLeft className="h-5 w-5 mr-2" />
                 Back to Dashboard
               </Link>
@@ -57,13 +57,22 @@ const NotFound = () => {
           <div className="border-t border-border pt-8">
             <p className="text-sm text-muted-foreground mb-4">Quick Links:</p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link to="/projects" className="text-sm text-primary hover:underline">
+              <Link
+                href="/projects"
+                className="text-sm text-primary hover:underline"
+              >
                 Projects
               </Link>
-              <Link to="/agencies" className="text-sm text-primary hover:underline">
+              <Link
+                href="/agencies"
+                className="text-sm text-primary hover:underline"
+              >
                 Agencies
               </Link>
-              <Link to="/reports" className="text-sm text-primary hover:underline">
+              <Link
+                href="/reports"
+                className="text-sm text-primary hover:underline"
+              >
                 Reports
               </Link>
             </div>

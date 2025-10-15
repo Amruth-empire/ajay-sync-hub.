@@ -1,17 +1,32 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 
 const authSchema = z.object({
-  email: z.string().trim().email({ message: "Invalid email address" }).max(255, { message: "Email must be less than 255 characters" }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters" }).max(100, { message: "Password must be less than 100 characters" }),
+  email: z
+    .string()
+    .trim()
+    .email({ message: "Invalid email address" })
+    .max(255, { message: "Email must be less than 255 characters" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters" })
+    .max(100, { message: "Password must be less than 100 characters" }),
 });
 
 const Auth = () => {
@@ -20,23 +35,26 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { signIn, signUp, user } = useAuth();
   const { toast } = useToast();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     if (user) {
-      navigate("/dashboard");
+      router.push("/dashboard");
     }
-  }, [user, navigate]);
+  }, [user, router]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const validatedData = authSchema.parse({ email, password });
       setIsLoading(true);
-      
-      const { error } = await signIn(validatedData.email, validatedData.password);
-      
+
+      const { error } = await signIn(
+        validatedData.email,
+        validatedData.password
+      );
+
       if (error) {
         if (error.message.includes("Invalid login credentials")) {
           toast({
@@ -72,18 +90,22 @@ const Auth = () => {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const validatedData = authSchema.parse({ email, password });
       setIsLoading(true);
-      
-      const { error } = await signUp(validatedData.email, validatedData.password);
-      
+
+      const { error } = await signUp(
+        validatedData.email,
+        validatedData.password
+      );
+
       if (error) {
         if (error.message.includes("User already registered")) {
           toast({
             title: "Account already exists",
-            description: "An account with this email already exists. Please sign in instead.",
+            description:
+              "An account with this email already exists. Please sign in instead.",
             variant: "destructive",
           });
         } else {
@@ -119,14 +141,20 @@ const Auth = () => {
           <div className="w-16 h-16 gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
             <span className="text-white font-bold text-2xl">PM</span>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">PM-AJAY Platform</h1>
-          <p className="text-muted-foreground">Smart Collaboration & Communication</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
+            PM-AJAY Platform
+          </h1>
+          <p className="text-muted-foreground">
+            Smart Collaboration & Communication
+          </p>
         </div>
 
         <Card className="border-border">
           <CardHeader>
             <CardTitle>Welcome</CardTitle>
-            <CardDescription>Sign in to your account or create a new one</CardDescription>
+            <CardDescription>
+              Sign in to your account or create a new one
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
@@ -134,7 +162,7 @@ const Auth = () => {
                 <TabsTrigger value="signin">Sign In</TabsTrigger>
                 <TabsTrigger value="signup">Sign Up</TabsTrigger>
               </TabsList>
-              
+
               <TabsContent value="signin">
                 <form onSubmit={handleSignIn} className="space-y-4">
                   <div className="space-y-2">
@@ -159,8 +187,8 @@ const Auth = () => {
                       required
                     />
                   </div>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full gradient-primary text-white border-0"
                     disabled={isLoading}
                   >
@@ -168,7 +196,7 @@ const Auth = () => {
                   </Button>
                 </form>
               </TabsContent>
-              
+
               <TabsContent value="signup">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div className="space-y-2">
@@ -196,8 +224,8 @@ const Auth = () => {
                       Password must be at least 6 characters long
                     </p>
                   </div>
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full gradient-primary text-white border-0"
                     disabled={isLoading}
                   >
