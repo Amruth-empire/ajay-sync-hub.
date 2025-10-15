@@ -5,8 +5,8 @@
   "/api/projects/route": "app/api/projects/route.js",
   "/page": "app/page.js",
   "/agencies/page": "app/agencies/page.js",
-  "/auth/page": "app/auth/page.js",
-  "/reports/page": "app/reports/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/projects/page": "app/projects/page.js"
+  "/auth/page": "app/auth/page.js",
+  "/projects/page": "app/projects/page.js",
+  "/reports/page": "app/reports/page.js"
 }
